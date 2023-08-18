@@ -1,7 +1,21 @@
-import { IsArray, IsDateString, IsNotEmpty, IsNumber, IsPositive, IsString, IsUUID, MaxLength, Min, ValidateNested, IsUrl, ArrayMinSize } from "class-validator";
+import { 
+  IsArray, 
+  IsNotEmpty, 
+  IsNumber, 
+  IsString, 
+  IsUUID, 
+  MaxLength, 
+  Min, 
+  ValidateNested, 
+  IsUrl, 
+  ArrayMinSize 
+} from "class-validator";
 import { Type } from "class-transformer";
+import { ProdutoEntity } from "../produto.entity";
 
 export class CaracteristicaProdutoDTO {
+
+  id: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Nome da cadasterística não pode ser vazio' })
@@ -10,16 +24,23 @@ export class CaracteristicaProdutoDTO {
   @IsString()
   @IsNotEmpty({ message: 'Descrição da característica não pode ser vazio' })
   descricao: string;
+
+  produto: ProdutoEntity;
 }
 
 export class ImagemProdutoDTO {
 
+  id: string;
+
   @IsUrl()
+  @MaxLength(100, { message: 'URL não pode ter mais que 100 caracteres' })
   url: string;
 
   @IsString()
   @IsNotEmpty({ message: 'Descrição da imagem não pode ser vazia' })
   descricao: string;
+
+  produto: ProdutoEntity;
 }
 
 export class CriaProdutoDTO {
@@ -33,7 +54,6 @@ export class CriaProdutoDTO {
 
   @IsNumber({ maxDecimalPlaces: 2, allowNaN: false, allowInfinity: false }) //Só 2 caracteres após a vírgula, não pode ser vazio e nem infinito
   @Min(1, { message: 'O valor precisa ser maior que zero' })
-  // @IsPositive({ message: 'O valor precisa ser positivo' })
   valor: number;
 
   @IsNumber()
@@ -47,7 +67,7 @@ export class CriaProdutoDTO {
 
   @ValidateNested()
   @IsArray()
-  // @ArrayMinSize(3)
+  @ArrayMinSize(1)
   @Type(() => CaracteristicaProdutoDTO)
   caracteristicas: CaracteristicaProdutoDTO[];
 
@@ -60,10 +80,4 @@ export class CriaProdutoDTO {
   @IsString({ message: 'Categoria deve ser uma string' })
   @IsNotEmpty({ message: 'Categoria do produto não pode ser vazia' })
   categoria: string;
-
-  // @IsDateString()
-  // dataCriacao: Date;
-
-  // @IsDateString()
-  // dataAtualizacao: Date;
 }

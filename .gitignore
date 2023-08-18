@@ -33,3 +33,6 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# .ENV - Deixei comentado de propósito (esse projeto é apenas de teste e quero deixar salvo a estrutura usada no .env)
+#.env

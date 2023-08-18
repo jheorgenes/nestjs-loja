@@ -26,7 +26,7 @@ export class ProdutoRepository {
 
   async atualiza(id: string, dadosProduto: Partial<ProdutoEntity>) {
     const produto = this.buscaPorId(id);
-    const dadosNaoAtualizaveis = ['id', 'usuarioId', 'dataCriacao', 'dataAtualizacao'];
+    const dadosNaoAtualizaveis = ['id', 'usuarioId'];
     
     Object
       .entries(dadosProduto)
@@ -36,10 +36,6 @@ export class ProdutoRepository {
         }
         
         produto[chave] = valor;
-
-        if(produto['dataAtualizacao']) {
-          produto['dataAtualizacao'] = new Date();
-        }
       })
     
     return produto;

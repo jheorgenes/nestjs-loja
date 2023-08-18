@@ -1,16 +1,23 @@
-import { IsArray, IsDateString, IsNotEmpty, IsNumber, IsPositive, IsString, IsUUID, MaxLength, Min, ValidateNested, IsUrl, isUUID, IsOptional, ArrayMinSize } from "class-validator";
+import { 
+  IsUUID,
+  IsArray, 
+  IsNotEmpty, 
+  IsNumber, 
+  IsString, 
+  MaxLength, 
+  Min, 
+  ValidateNested, 
+  IsOptional, 
+  ArrayMinSize 
+} from "class-validator";
 import { Type } from "class-transformer";
 import { CaracteristicaProdutoDTO, ImagemProdutoDTO } from "./CriaProduto.dto";
 
 export class AtualizaProdutoDTO {
 
-  // @IsUUID(undefined, { message: 'ID do produto inválido' })
-  // @IsOptional()
-  // id: string;
-
-  // @IsUUID(undefined, { message: 'ID do usuário inválido' })
-  // @IsOptional()
-  // usuarioId: string;
+  @IsUUID(undefined, { message: 'ID do usuário inválido' })
+  @IsOptional()
+  usuarioId: string;
 
   @IsString({ message: 'O nome deve ser uma string' })
   @IsNotEmpty({ message: 'O nome não pode ser vazio' })
@@ -35,7 +42,7 @@ export class AtualizaProdutoDTO {
 
   @ValidateNested()
   @IsArray()
-  // @ArrayMinSize(3)
+  @ArrayMinSize(1)
   @Type(() => CaracteristicaProdutoDTO)
   @IsOptional()
   caracteristicas: CaracteristicaProdutoDTO[];
@@ -51,12 +58,4 @@ export class AtualizaProdutoDTO {
   @IsNotEmpty({ message: 'Categoria do produto não pode ser vazia' })
   @IsOptional()
   categoria: string;
-
-  @IsDateString()
-  @IsOptional()
-  dataCriacao: Date;
-
-  @IsDateString()
-  @IsOptional()
-  dataAtualizacao: Date;
 }
