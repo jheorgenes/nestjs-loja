@@ -32,6 +32,19 @@
 $ npm install
 ```
 
+```bash
+$ npm i dotenv@16.0.3
+```
+
+## Comando para instalar o cli do typeorm e depois de configurado o data-source, ativá-lo
+```bash
+$ npm i -g typeorm@0.3.16
+```
+
+```bash
+$ typeorm-ts-node-esm -d src/db/data-source-cli.ts migration:show
+```
+
 ## Running the app
 
 ```bash
