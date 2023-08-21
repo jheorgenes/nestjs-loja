@@ -4,6 +4,7 @@ import { ProdutoEntity } from "./produto.entity";
 import { Repository } from "typeorm";
 import { ListaProdutoDTO } from "./dto/ListaProduto.dto";
 import { AtualizaProdutoDTO } from "./dto/AtualizaProduto.dto";
+import { CriaProdutoDTO } from "./dto/CriaProduto.dto";
 
 @Injectable()
 export class ProdutoService {
@@ -12,7 +13,16 @@ export class ProdutoService {
     private readonly produtoRepository: Repository<ProdutoEntity>
   ) {}
 
-  async criaProduto(produtoEntity: ProdutoEntity) {
+  async criaProduto(produto: CriaProdutoDTO) {
+    const produtoEntity = new ProdutoEntity();
+    produtoEntity.nome = produto.nome;
+    produtoEntity.usuarioId = produto.usuarioId;
+    produtoEntity.valor = produto.valor;
+    produtoEntity.quantidadeDisponivel = produto.quantidadeDisponivel;
+    produtoEntity.descricao = produto.descricao;
+    produtoEntity.categoria = produto.categoria;
+    produtoEntity.caracteristicas = produto.caracteristicas;
+    produtoEntity.imagens = produto.imagens;
     return await this.produtoRepository.save(produtoEntity);
   }
 
