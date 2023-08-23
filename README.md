@@ -40,9 +40,27 @@ $ npm i dotenv@16.0.3
 ```bash
 $ npm i -g typeorm@0.3.16
 ```
+## Depois de configurado script no package.json para executar migration 
+# o comando inicial que será executado 'typeorm-ts-node-esm -d src/db/data-source-cli.ts'
 
+# Exibir migrations
 ```bash
-$ typeorm-ts-node-esm -d src/db/data-source-cli.ts migration:show
+$ npm run typeorm migration:show
+```
+
+# Gerar migrations
+```bash
+$ npm run typeorm migration:generate src/db/migrations/nome-da-migracao
+```
+
+# Executar migrations
+```bash
+$ npm run typeorm migration:run
+```
+
+# Desfazer ultima migration
+```bash
+$ npm run typeorm migration:revert
 ```
 
 ## Running the app

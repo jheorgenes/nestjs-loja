@@ -9,7 +9,7 @@ const dataSourceOptions: DataSourceOptions = {
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
   entities: [__dirname + '/../**/*.entity{.js,.ts}'], //Para pegar na raiz do projeto até o src e tiver com o final .entity
-  migrations: [__dirname + '/migrations/*.{.js,.ts}'],
+  migrations: [__dirname + '/migrations/*.{js,ts}'],
   // synchronize: true //Apenas para tempo de desenvolvimento (Cria tabelas automaticamente)
 }
 

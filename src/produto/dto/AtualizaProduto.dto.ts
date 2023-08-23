@@ -1,5 +1,4 @@
 import { 
-  IsUUID,
   IsArray, 
   IsNotEmpty, 
   IsNumber, 
@@ -14,10 +13,6 @@ import { Type } from "class-transformer";
 import { CaracteristicaProdutoDTO, ImagemProdutoDTO } from "./CriaProduto.dto";
 
 export class AtualizaProdutoDTO {
-
-  @IsUUID(undefined, { message: 'ID do usuário inválido' })
-  @IsOptional()
-  usuarioId: string;
 
   @IsString({ message: 'O nome deve ser uma string' })
   @IsNotEmpty({ message: 'O nome não pode ser vazio' })
