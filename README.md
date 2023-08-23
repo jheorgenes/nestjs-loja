@@ -63,6 +63,13 @@ $ npm run typeorm migration:run
 $ npm run typeorm migration:revert
 ```
 
+
+## Como gerar estrutura completa do crud com nest
+```bash
+$ npm g resource nome-entity --no-spec
+```
+// --no=spec significa que não vai criar arquivos de teste
+
 ## Running the app
 
 ```bash

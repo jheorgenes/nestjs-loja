@@ -1,10 +1,12 @@
+import { PedidoEntity } from '../pedido/pedido.entity';
 import { 
   Entity, 
   Column, 
   CreateDateColumn, 
   UpdateDateColumn, 
   DeleteDateColumn, 
-  PrimaryGeneratedColumn 
+  PrimaryGeneratedColumn, 
+  OneToMany
 } from 'typeorm'
 
 @Entity({ name: 'usuarios' })
@@ -30,4 +32,12 @@ export class UsuarioEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
+
+  // Relacionamento 1:N
+  // Um usuário tem vários pedidos
+  @OneToMany(
+    () => PedidoEntity, 
+    (pedido) => pedido.usuario
+  )
+  pedidos: PedidoEntity[];
 }
