@@ -9,6 +9,7 @@ import {
 } from 'typeorm'
 import { ProdutoCaracteristicaEntity } from './produto-caracteristica.entity';
 import { ProdutoImagemEntity } from './produto-imagem.entity';
+import { ItemPedidoEntity } from '../pedido/itempedido.entity';
 
 @Entity({ name: 'produtos' })
 export class ProdutoEntity {
@@ -44,6 +45,12 @@ export class ProdutoEntity {
     { cascade: true, eager: true } //cascade: true permite (ao criar um produto), que crie as imagens também. O eager é só pra visualizar ao consultar produto
   )
   imagens: ProdutoImagemEntity[];
+
+  @OneToMany(
+    () => ItemPedidoEntity,
+    (itemPedido) => itemPedido.produto
+  )
+  itensPedido: ItemPedidoEntity[];
   
   @CreateDateColumn({ name: 'created_at' })
   createdAt: string;
@@ -53,4 +60,5 @@ export class ProdutoEntity {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: string;
+  
 }

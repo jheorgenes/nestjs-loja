@@ -1,13 +1,18 @@
-import { Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { PedidoService } from './pedido.service';
+import { CriaPedidoDTO } from './dto/CriaPedido.dto';
+import { AtualizaPedidoDTO } from './dto/AtualizaPedido.dto';
 
 @Controller('pedidos')
 export class PedidoController {
   constructor(private readonly pedidoService: PedidoService) {}
 
   @Post()
-  async criaPedido(@Query('usuarioId') usuarioId: string) {
-    const object = await this.pedidoService.cadastraPedido(usuarioId);
+  async criaPedido(
+    @Query('usuarioId') usuarioId: string,
+    @Body() dadosDoPedido: CriaPedidoDTO
+  ) {
+    const object = await this.pedidoService.cadastraPedido(usuarioId, dadosDoPedido);
     return object;
   }
 
@@ -17,8 +22,11 @@ export class PedidoController {
     return pedidos;
   }
 
-  // @Put('/id')
-  // async atualizaPedido() {
-    
-  // }
+  @Patch('id')
+  async atualizaPedido(
+    @Param('id') pedidoId: string,
+    @Body() dadosAtualizacao: AtualizaPedidoDTO
+  ) {
+    return await this.pedidoService.atualizaPedido(pedidoId, dadosAtualizacao);
+  }
 }
