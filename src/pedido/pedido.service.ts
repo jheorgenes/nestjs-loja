@@ -114,6 +114,7 @@ export class PedidoService {
     }
 
     Object.assign(pedido, dto);
+
     return await this.pedidoRepository.save(pedido);
   }
 }
