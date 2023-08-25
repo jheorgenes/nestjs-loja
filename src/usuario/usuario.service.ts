@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { ListaUsuarioDTO } from "./dto/ListaUsuario.dto";
 import { UsuarioEntity } from "./usuario.entity";
@@ -22,19 +22,48 @@ export class UsuarioService {
     return usuariosLista;
   }
 
+  async buscaPorEmail(email: string) {
+    const checkEmail = await this.usuarioRepository.findOne({
+      where: { email },
+    });
+
+    if (checkEmail === null)
+      throw new NotFoundException('O email não foi encontrado.');
+
+    return checkEmail;
+  }
+
+
   async criaUsuario(usuario: CriaUsuarioDTO) {
     const usuarioEntity = new UsuarioEntity();
-    usuarioEntity.nome = usuario.nome;
-    usuarioEntity.email = usuario.email;
-    usuarioEntity.senha = usuario.senha;
+    
+    Object.assign(usuarioEntity, usuario as UsuarioEntity);
+
     return await this.usuarioRepository.save(usuario);
   }
 
+  // async atualizaUsuario(id: string, usuarioAtualizado: AtualizaUsuarioDTO) {
+  //   await this.usuarioRepository.update(id, usuarioAtualizado);
+  // }
+
   async atualizaUsuario(id: string, usuarioAtualizado: AtualizaUsuarioDTO) {
-    await this.usuarioRepository.update(id, usuarioAtualizado);
+    const usuario = await this.usuarioRepository.findOneBy({ id });
+
+    if(usuario === null) {
+      throw new NotFoundException(`O usuário não foi encontrado`);
+    }
+ 
+     Object.assign(usuario, usuarioAtualizado as UsuarioEntity);
+ 
+     return this.usuarioRepository.save(usuario);
+   }
+ 
+
+   async deletaUsuario(id: string) {
+    const resultado = await this.usuarioRepository.delete(id);
+
+    if (!resultado.affected) //resultado.affected diz quantos registros foram deletados do BD. Se o número deletado for 0 vai executar o if
+      throw new NotFoundException('O usuário não foi encontrado.');
   }
 
-  async deletaUsuario(id: string) {
-    await this.usuarioRepository.delete(id);
-  }
 }

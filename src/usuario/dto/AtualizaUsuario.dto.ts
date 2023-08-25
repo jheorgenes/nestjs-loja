@@ -1,19 +1,5 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, MinLength } from "class-validator";
-import { EmailEhUnico } from "../validacao/email-eh-unico.validator";
+import { CriaUsuarioDTO } from "./CriaUsuario.dto";
+import { PartialType } from "@nestjs/mapped-types";
 
-export class AtualizaUsuarioDTO {
-
-  @IsString({ message: 'O nome deve ser uma string' })
-  @IsNotEmpty({ message: 'O nome não pode ser vazio' })
-  @IsOptional()
-  nome: string;
-
-  @IsEmail(undefined, { message: 'O e-mail informado é inválido' })
-  @EmailEhUnico({ message: 'Já existe um usuário com esse e-mail' })
-  @IsOptional()
-  email: string;
-
-  @MinLength(6, { message: 'A senha precisa ter pelo menos 6 caracteres' })
-  @IsOptional()
-  senha: string;
-}
+//PartialType declara o mesmo dto herdado, porém com o adicional de @Optional em cada atributo
+export class AtualizaUsuarioDTO extends PartialType(CriaUsuarioDTO) {}

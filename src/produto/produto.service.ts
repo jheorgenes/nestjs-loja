@@ -15,13 +15,10 @@ export class ProdutoService {
 
   async criaProduto(produto: CriaProdutoDTO) {
     const produtoEntity = new ProdutoEntity();
-    produtoEntity.nome = produto.nome;
-    produtoEntity.valor = produto.valor;
-    produtoEntity.quantidadeDisponivel = produto.quantidadeDisponivel;
-    produtoEntity.descricao = produto.descricao;
-    produtoEntity.categoria = produto.categoria;
-    produtoEntity.caracteristicas = produto.caracteristicas;
-    produtoEntity.imagens = produto.imagens;
+
+    //Ao usar Object.assign é interessante declarar que 'produto' que vem de CriaProdutoDTO é (da mesma estrutura) que ProdutoEntity. E pra isso tem que usar o 'as' como abaixo
+    Object.assign(produtoEntity, produto as ProdutoEntity); 
+
     return await this.produtoRepository.save(produtoEntity);
   }
 
@@ -47,11 +44,16 @@ export class ProdutoService {
       throw new NotFoundException('O produto não foi encontrado');
     }
 
-    Object.assign(entityName, produtoAtualizado); //Transferindo dados de um objeto para outro
+    Object.assign(entityName, produtoAtualizado as ProdutoEntity); //Transferindo dados de um objeto para outro
     return await this.produtoRepository.save(entityName);
   }
 
   async deletaProduto(id: string) {
-    await this.produtoRepository.delete(id);
+    const resultado = await this.produtoRepository.delete(id);
+
+    if (!resultado.affected) {
+      throw new NotFoundException('O produto não foi encontrado');
+    }
   }
+
 }
