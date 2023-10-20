@@ -17,6 +17,17 @@ export class PedidoController {
   }
 
   @Get()
+  async buscaTodosOsPedidos() {
+    const todosOsPedidos = await this.pedidoService.buscarTodosOsPedidos();
+    return todosOsPedidos;
+  }
+
+  @Get('/:id')
+  async buscaPedido(@Param('id') pedidoId: string) {
+    return await this.pedidoService.buscaPedido(pedidoId);
+  }
+
+  @Get()
   async buscaPedidosDoUsuario(@Query('usuarioId') usuarioId: string) {
     const pedidos = await this.pedidoService.buscaPedidosDoUsuario(usuarioId);
     return pedidos;

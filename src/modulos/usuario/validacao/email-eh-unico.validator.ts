@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { UsuarioRepository } from './../usuario.repository';
+import { UsuarioRepository } from '../usuario.repository';
 import { ValidationArguments, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface, registerDecorator } from "class-validator";
 import { UsuarioService } from '../usuario.service';
 

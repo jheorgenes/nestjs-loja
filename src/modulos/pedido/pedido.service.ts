@@ -92,6 +92,14 @@ export class PedidoService {
     return pedidoCriado;
   }
 
+  async buscarTodosOsPedidos() {
+    const todosOsPedidos = await this.pedidoRepository.find({
+      relations: ['itensPedido']
+    });
+
+    return todosOsPedidos;
+  }
+
   async buscaPedidosDoUsuario(usuarioId: string) {
     await this.buscaUsuario(usuarioId);
     // Usa o repositório de pedido para filtrar os pedidos pelo usuário
@@ -104,6 +112,13 @@ export class PedidoService {
       relations: {
         usuario: true,
       },
+    });
+  }
+
+  async buscaPedido(id: string) {
+    return this.pedidoRepository.findOne({
+      where: { id },
+      relations: ['itensPedido']
     });
   }
 

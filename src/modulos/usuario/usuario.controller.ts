@@ -21,6 +21,11 @@ export class UsuarioController {
     }
   }
 
+  @Get('/:id')
+  async buscaUsuarioPorId(@Param('id') id: string) {
+    return await this.usuarioService.buscaUsuarioPorId(id);
+  }
+
   @Get()
   async listUsuarios() {
     const usuariosSalvos = await this.usuarioService.listaUsuarios();

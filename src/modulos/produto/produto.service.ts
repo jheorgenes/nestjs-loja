@@ -37,15 +37,21 @@ export class ProdutoService {
     return produtosLista;
   }
 
-  async atualizaProduto(id: string, produtoAtualizado: AtualizaProdutoDTO) {
-    const entityName = await this.produtoRepository.findOneBy({ id });
+  async listaUmProduto(id: string) {
+    const produtoEntity = await this.produtoRepository.findOneBy({ id });
 
-    if(entityName === null) {
+    if(produtoEntity === null) {
       throw new NotFoundException('O produto não foi encontrado');
     }
 
-    Object.assign(entityName, produtoAtualizado as ProdutoEntity); //Transferindo dados de um objeto para outro
-    return await this.produtoRepository.save(entityName);
+    return produtoEntity
+  }
+
+  async atualizaProduto(id: string, produtoAtualizado: AtualizaProdutoDTO) {
+    const produtoEntity = await this.listaUmProduto(id);
+
+    Object.assign(produtoEntity, produtoAtualizado as ProdutoEntity); //Transferindo dados de um objeto para outro
+    return await this.produtoRepository.save(produtoEntity);
   }
 
   async deletaProduto(id: string) {

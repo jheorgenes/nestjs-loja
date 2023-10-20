@@ -32,43 +32,55 @@
 $ npm install
 ```
 
+# Dependêncies
+
 ```bash
 $ npm i dotenv@16.0.3
 ```
 
-## Comando para instalar o cli do typeorm e depois de configurado o data-source, ativá-lo
+### Comando para instalar o cli do typeorm e depois de configurado o data-source, ativá-lo
 ```bash
 $ npm i -g typeorm@0.3.16
 ```
 ## Depois de configurado script no package.json para executar migration 
-# o comando inicial que será executado 'typeorm-ts-node-esm -d src/db/data-source-cli.ts'
+### o comando inicial que será executado 'typeorm-ts-node-esm -d src/db/data-source-cli.ts'
 
-# Exibir migrations
+### Exibir migrations
 ```bash
 $ npm run typeorm migration:show
 ```
 
-# Gerar migrations
+### Gerar migrations
 ```bash
 $ npm run typeorm migration:generate src/db/migrations/nome-da-migracao
 ```
 
-# Executar migrations
+### Executar migrations
 ```bash
 $ npm run typeorm migration:run
 ```
 
-# Desfazer ultima migration
+### Desfazer ultima migration
 ```bash
 $ npm run typeorm migration:revert
 ```
 
 
-## Como gerar estrutura completa do crud com nest
+### Como gerar estrutura completa do crud com nest
 ```bash
 $ npm g resource nome-entity --no-spec
 ```
 // --no=spec significa que não vai criar arquivos de teste
+
+### Cache-manager
+```bash
+$ npm i @nestjs/cache-manager@2.0.1 -E cache-manager@5.2.3 -E
+```
+
+### Cache-manager Redis
+```bash
+$ npm i cache-manager-redis-yet@4.1.2 -E
+```
 
 ## Running the app
 

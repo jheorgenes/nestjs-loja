@@ -8,6 +8,7 @@ import { CriaUsuarioDTO } from "./dto/CriaUsuario.dto";
 
 @Injectable()
 export class UsuarioService {
+  
   constructor(
     @InjectRepository(UsuarioEntity)
     private readonly usuarioRepository: Repository<UsuarioEntity>
@@ -20,6 +21,12 @@ export class UsuarioService {
     );
 
     return usuariosLista;
+  }
+
+  async buscaUsuarioPorId(id: string) {
+    return await this.usuarioRepository.findOne({
+      where: { id }
+    })
   }
 
   async buscaPorEmail(email: string) {
