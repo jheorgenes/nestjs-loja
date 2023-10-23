@@ -82,6 +82,23 @@ $ npm i @nestjs/cache-manager@2.0.1 -E cache-manager@5.2.3 -E
 $ npm i cache-manager-redis-yet@4.1.2 -E
 ```
 
+### bcrypt
+```bash
+$ npm i bcrypt@5.1.0 -E
+$ npm i --save-dev @types/bcrypt
+```
+
+### Criando resourses sem testes
+```bash
+$ nest g resource <caminho/nome-resource> --no-spec
+```
+
+
+### JWT Token
+```bash
+$ npm i @nestjs/jwt@10.1.0 -E
+```
+
 ## Running the app
 
 ```bash

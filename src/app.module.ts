@@ -9,6 +9,7 @@ import { FiltroDeExcecaoGlobal } from './recursos/filtros/filtro-de-excecao-glob
 import { APP_FILTER } from '@nestjs/core';
 import { CacheModule } from '@nestjs/cache-manager';
 import { redisStore } from 'cache-manager-redis-yet';
+import { AutenticacaoModule } from './modulos/autenticacao/autenticacao.module';
 
 @Module({
   imports: [
@@ -36,6 +37,7 @@ import { redisStore } from 'cache-manager-redis-yet';
       useClass: PostgresConfigService,
       inject: [PostgresConfigService]
     }),
+    AutenticacaoModule,
   ],
   providers: [ //Definindo de forma global os filtros de Exceção
     {
