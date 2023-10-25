@@ -6,18 +6,24 @@ import { ProdutoService } from './produto.service';
 import { Cache } from 'cache-manager';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { ProdutoEntity } from './produto.entity';
+import { CustomLogger } from 'src/recursos/interceptores/custom-logger/custom-logger.service';
 
 @Controller('produtos')
 export class ProdutoController {
 
   constructor(
     private readonly produtoService: ProdutoService,
+    private readonly logger: CustomLogger,
     @Inject(CACHE_MANAGER) private gerenciadorDeCache: Cache //Injetando um serviço de cache
   ) {}
 
   @Post()
   async criaProduto(@Body() dadosProduto: CriaProdutoDTO) {
-    const produtoCadastrado = this.produtoService.criaProduto(dadosProduto);
+    const produtoCadastrado = await this.produtoService.criaProduto(dadosProduto);
+
+    this.logger.logEmArquivo(produtoCadastrado);
+    this.logger.logColorido(produtoCadastrado);
+
     return produtoCadastrado;
   }
 

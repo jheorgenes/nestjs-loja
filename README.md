@@ -103,6 +103,17 @@ $ npm i @nestjs/jwt@10.1.0 -E
 $ nest g guard modulos/autenticacao/autenticacao --no-spec
 ```
 
+### Gerando um Interceptor
+```bash
+$ nest g itc recursos/interceptores/logger-global --no-spec
+```
+
+
+### Colors para colorir terminal
+```bash
+$ npm install colors
+```
+
 ## Running the app
 
 ```bash
