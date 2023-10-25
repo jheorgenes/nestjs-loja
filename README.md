@@ -93,10 +93,14 @@ $ npm i --save-dev @types/bcrypt
 $ nest g resource <caminho/nome-resource> --no-spec
 ```
 
-
 ### JWT Token
 ```bash
 $ npm i @nestjs/jwt@10.1.0 -E
+```
+
+### Gerando um guard
+```bash
+$ nest g guard modulos/autenticacao/autenticacao --no-spec
 ```
 
 ## Running the app

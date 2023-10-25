@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { PedidoEntity } from '../pedido/pedido.entity';
 import { 
   Entity, 
@@ -21,6 +22,7 @@ export class UsuarioEntity {
   @Column({ name: 'email', length: 70, nullable: false })
   email: string;
 
+  @Exclude() //Vai excluir dos endpoints, a exibição desse campo (mesmo puxando de relacionamentos)
   @Column({ name: 'senha', length: 255, nullable: false })
   senha: string;
 
